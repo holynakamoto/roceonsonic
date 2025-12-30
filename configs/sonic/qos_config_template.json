@@ -1,0 +1,50 @@
+{
+    "BUFFER_POOL": {
+        "ingress_lossless_pool": {
+            "mode": "dynamic",
+            "size": "12766208",
+            "type": "ingress"
+        },
+        "egress_lossless_pool": {
+            "mode": "dynamic",
+            "size": "12766208",
+            "type": "egress"
+        }
+    },
+    "BUFFER_PROFILE": {
+        "ingress_lossless_profile": {
+            "pool": "ingress_lossless_pool",
+            "size": "0",
+            "dynamic_th": "1"
+        },
+        "egress_lossless_profile": {
+            "pool": "egress_lossless_pool",
+            "size": "0",
+            "dynamic_th": "1"
+        }
+    },
+    "BUFFER_PG": {
+        "Ethernet0|3": {
+            "profile": "ingress_lossless_profile"
+        },
+        "Ethernet4|3": {
+            "profile": "ingress_lossless_profile"
+        }
+    },
+    "BUFFER_QUEUE": {
+        "Ethernet0|3": {
+            "profile": "egress_lossless_profile"
+        },
+        "Ethernet4|3": {
+            "profile": "egress_lossless_profile"
+        }
+    },
+    "PORT_QOS_MAP": {
+        "Ethernet0": {
+            "pfc_enable": "3"
+        },
+        "Ethernet4": {
+            "pfc_enable": "3"
+        }
+    }
+}
