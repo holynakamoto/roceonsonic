@@ -15,6 +15,7 @@ A Proof-of-Concept demonstration showcasing RoCEv2 configuration on SONiC switch
 - ✅ **Multi-VLAN**: Successfully tested both VLAN 10 and VLAN 20
 
 **Quick Results**:
+
 - VLAN 10: server01 ↔ server03 (23.08 MB/sec), server01 ↔ server05 (21.10 MB/sec)
 - VLAN 20: server02 ↔ server04 (20.56 MB/sec)
 - PFC: Enabled and ready (0 pause frames = no congestion)
@@ -26,6 +27,7 @@ See [detailed results](docs/results.md) for complete analysis.
 ## 🎯 Project Overview
 
 This PoC demonstrates:
+
 - **SONiC Configuration**: Lossless Ethernet fabric setup using Priority Flow Control (PFC) and QoS on virtual NVIDIA Spectrum switches
 - **RoCEv2 Enablement**: RDMA over Converged Ethernet configuration on simulated ConnectX adapters
 - **Performance Validation**: Functional RDMA testing using industry-standard tools (`perftest` suite)
@@ -36,6 +38,7 @@ This PoC demonstrates:
 ## 📋 Skills Demonstrated
 
 This project evidences practical experience with:
+
 - **SONiC NOS**: Configuration management, PFC/QoS setup, lossless fabric design
 - **NVIDIA Networking**: Spectrum switches and ConnectX adapter configuration
 - **RoCE/RDMA**: RoCEv2 protocol, RDMA programming, performance testing
@@ -46,6 +49,7 @@ This project evidences practical experience with:
 ## 🏗️ Architecture
 
 ### Topology
+
 - **Lab**: SONiC Numbered BGP EVPN VXLAN Demo (NVIDIA Air)
 - **Architecture**: 3-leaf, 2-spine SONiC switches with 6 Ubuntu 18.04 servers
 - **VLANs**: VLAN 10 and VLAN 20 (L2 extension via VXLAN)
@@ -55,6 +59,7 @@ This project evidences practical experience with:
 See `docs/lab-topology.md` for detailed topology and IP addressing information.
 
 ### Key Components
+
 1. **SONiC Switches**: Virtual NVIDIA Spectrum switches running SONiC
 2. **Host Systems**: Ubuntu servers with RDMA-capable interfaces
 3. **Lossless Fabric**: PFC-enabled ports, QoS policies for RoCE traffic
@@ -84,11 +89,13 @@ roceonsonic/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 1. **NVIDIA Air Account**: Free registration at https://air.nvidia.com/
 2. **Browser**: Modern browser with WebRTC support for NVIDIA Air console access
 3. **Basic Knowledge**: Familiarity with Linux CLI and networking concepts
 
 ### Setup Steps
+
 1. **Access NVIDIA Air**: Log into your NVIDIA Air account at https://air.nvidia.com/
 2. **Launch Lab**: Start the "SONiC Numbered BGP EVPN VXLAN Demo" lab
 3. **Access Environment**: Connect via oob-mgmt-server (username: `ubuntu`, password: `nvidia`)
@@ -103,6 +110,7 @@ roceonsonic/
 ## 📊 Testing & Validation
 
 ### Functional Requirements
+
 - ✅ **FR-01**: SONiC lossless configuration with PFC and QoS
 - ✅ **FR-02**: RoCEv2 enabled on host interfaces
 - ✅ **FR-03**: RDMA tests (ib_write_bw, ib_send_lat) running successfully
@@ -111,6 +119,7 @@ roceonsonic/
 - ✅ **FR-06**: Comprehensive documentation
 
 ### Test Tools
+
 - `ibv_devices` / `ibstat`: RDMA device verification
 - `ib_write_bw`: RDMA write bandwidth test
 - `ib_send_lat`: RDMA send latency test
@@ -119,12 +128,14 @@ roceonsonic/
 ## 🔧 Configuration Examples
 
 ### SONiC PFC Configuration
+
 ```bash
 # Example PFC configuration commands
 # (See configs/ directory for complete examples)
 ```
 
 ### Host RoCE Enablement
+
 ```bash
 # Example host configuration
 # (See scripts/setup/ directory for complete examples)
@@ -135,21 +146,25 @@ roceonsonic/
 ### Completed PoC Results ✅
 
 **Switch Configuration**:
+
 - ✅ PFC configured on priority 3 for Ethernet0 and Ethernet4 on all three leaf switches (leaf01, leaf02, leaf03)
 - ✅ Lossless buffer pools configured (12.7 MB ingress/egress)
 - ✅ PORT_QOS_MAP applied successfully
 
 **Host Configuration**:
+
 - ✅ Soft-RoCE (rdma_rxe) configured on server01 and server03
 - ✅ rxe0 RDMA devices created and active on eth1 interfaces
 
 **RDMA Testing**:
+
 - ✅ Functional RDMA communication established between server01 and server03
 - ✅ Achieved ~23 MB/sec bandwidth with ib_send_bw
 - ✅ Zero packet loss demonstrated
 - ✅ PFC counters verified (PFC enabled and ready)
 
 **Performance Metrics**:
+
 - **Bandwidth**: ~23 MB/sec (ib_send_bw, 65536 byte messages)
 - **Packet Loss**: Zero
 - **PFC Status**: Enabled on priority 3, ready to activate on congestion
@@ -159,6 +174,7 @@ roceonsonic/
 ### Detailed Results
 
 Performance results and analysis are documented in:
+
 - `docs/results.md`: Comprehensive test results and analysis with full details
 - `screenshots/`: Visual evidence of configuration and testing
 - `results/`: Raw test output files
@@ -189,6 +205,7 @@ For questions or feedback, please open an issue in this repository.
 **Completed**: December 30, 2025
 
 ### What Works ✅
+
 - PFC configured on leaf01, leaf02, leaf03 (priority 3, Ethernet0/4)
 - Soft-RoCE configured on server01, server03
 - RDMA tests passing with ~23 MB/sec bandwidth
@@ -196,3 +213,24 @@ For questions or feedback, please open an issue in this repository.
 - PFC ready to activate on congestion
 
 Last Updated: December 30, 2025
+
+**Architecture Overview**
+
+Below is a Mermaid diagram that describes the repository structure and key components. GitHub will render this block as a diagram when viewing the README.
+
+```mermaid
+flowchart TD
+	A[RoCEonSONIC Repository]
+	A --> B[docs/]
+	A --> C[configs/]
+	A --> D[scripts/]
+	A --> E[screenshots/]
+	A --> F[results/]
+	B --> B1[lab-topology.md]
+	B --> B2[setup-guide.md]
+	C --> C1[sonic/]
+	C --> C2[qos/]
+	D --> D1[setup/]
+	D --> D2[validation/]
+	D --> D3[perftest/]
+```

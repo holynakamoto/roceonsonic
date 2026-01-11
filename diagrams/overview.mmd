@@ -1,0 +1,18 @@
+%% diagrams/overview.mmd
+%% Mermaid diagram describing repository architecture
+flowchart TD
+    A[RoCEonSONIC Repository]
+    A --> B[docs/]
+    A --> C[configs/]
+    A --> D[scripts/]
+    A --> E[screenshots/]
+    A --> F[results/]
+    B --> B1[lab-topology.md]
+    B --> B2[setup-guide.md]
+    C --> C1[sonic/]
+    C --> C2[qos/]
+    D --> D1[setup/]
+    D --> D2[validation/]
+    D --> D3[perftest/]
+    classDef repo fill:#f9f,stroke:#333,stroke-width:1px;
+    class A repo
