@@ -1,0 +1,50 @@
+%% diagrams/topology.mmd
+%% Mermaid network topology: OOB management, spines, leafs, servers
+flowchart LR
+    subgraph OOB[OOB Management]
+        OMS[OOB Management Server]
+        OBS[OOB Management Switch]
+        OMS --- OBS
+    end
+
+    subgraph Spine[Spines]
+        SP1[Spine01]
+        SP2[Spine02]
+        SP1 --- SP2
+    end
+
+    subgraph Leafs[Leaf Fabric]
+        L1[Leaf01]
+        L2[Leaf02]
+        L3[Leaf03]
+    end
+
+    subgraph Hosts[Servers]
+        S1[server01]
+        S2[server02]
+        S3[server03]
+        S4[server04]
+        S5[server05]
+        S6[server06]
+    end
+
+    %% Spine-to-Leaf connectivity
+    SP1 --> L1
+    SP1 --> L2
+    SP1 --> L3
+    SP2 --> L1
+    SP2 --> L2
+    SP2 --> L3
+
+    %% Leaf-to-Host connectivity
+    L1 --> S1
+    L1 --> S2
+    L2 --> S3
+    L2 --> S4
+    L3 --> S5
+    L3 --> S6
+
+    %% Management plane connectivity to leaf fabric
+    OBS --> L1
+    OBS --> L2
+    OBS --> L3

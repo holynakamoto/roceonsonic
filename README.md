@@ -214,23 +214,60 @@ For questions or feedback, please open an issue in this repository.
 
 Last Updated: December 30, 2025
 
-**Architecture Overview**
+**Network Topology**
 
-Below is a Mermaid diagram that describes the repository structure and key components. GitHub will render this block as a diagram when viewing the README.
+This diagram shows the OOB management plane, spine/leaf fabric, and servers used in the lab.
 
 ```mermaid
-flowchart TD
-	A[RoCEonSONIC Repository]
-	A --> B[docs/]
-	A --> C[configs/]
-	A --> D[scripts/]
-	A --> E[screenshots/]
-	A --> F[results/]
-	B --> B1[lab-topology.md]
-	B --> B2[setup-guide.md]
-	C --> C1[sonic/]
-	C --> C2[qos/]
-	D --> D1[setup/]
-	D --> D2[validation/]
-	D --> D3[perftest/]
+flowchart LR
+	subgraph OOB[OOB Management]
+		OMS[OOB Management Server]
+		OBS[OOB Management Switch]
+		OMS --- OBS
+	end
+
+	subgraph Spine[Spines]
+		SP1[Spine01]
+		SP2[Spine02]
+		SP1 --- SP2
+	end
+
+	subgraph Leafs[Leaf Fabric]
+		L1[Leaf01]
+		L2[Leaf02]
+		L3[Leaf03]
+	end
+
+	subgraph Hosts[Servers]
+		S1[server01]
+		S2[server02]
+		S3[server03]
+		S4[server04]
+		S5[server05]
+		S6[server06]
+	end
+
+	%% Spine-to-Leaf connectivity
+	SP1 --> L1
+	SP1 --> L2
+	SP1 --> L3
+	SP2 --> L1
+	SP2 --> L2
+	SP2 --> L3
+
+	%% Leaf-to-Host connectivity
+	L1 --> S1
+	L1 --> S2
+	L2 --> S3
+	L2 --> S4
+	L3 --> S5
+	L3 --> S6
+
+	%% Management plane connectivity to leaf fabric
+	OBS --> L1
+	OBS --> L2
+	OBS --> L3
+
 ```
+
+You can also edit the separate source file at `diagrams/topology.mmd`.
